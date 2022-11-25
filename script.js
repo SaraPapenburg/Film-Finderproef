@@ -26,16 +26,18 @@ function addMoviesToDom(movies) {
 
 addMoviesToDom(movies);
 
-// radiobuttons event veranderen
-const addEventListeners = function () {
-    const radioBtns = document.querySelectorAll("film-filter");
-    radioBtns.forEach((radio) =>
-        radio.addEventListener("change", handleOnChangeEvent)
+// radiobuttons veranderen van event VOLGENS MIJ GAAT HET HIER NIET HELEMAAL GOED
+function addEventListeners() {
+    const radioBtns = document.getElementsByName("film-filter");
+    radioBtns.forEach((container) =>
+        container.addEventListener("change", handleOnChangeEvent)
     );
 };
 
 addEventListeners();
 
+
+// filteren van de films, handleonchange wordt ingevoegd bij de eventlistener functie
 function handleOnChangeEvent(event) {
     switch (event.target.value) {
         case "latest":
@@ -56,18 +58,35 @@ function handleOnChangeEvent(event) {
     }
 };
 
+//filteren o.b.v. jaartal
+function filterLatestMovies(year) {
+    let filterYearMovies = movies.filter((movie) => {
+        if (movie.year >= year) {
+            return movie;
+        }
+    });
+    addMoviesToDom(filterYearMovies);
+}
+
+//filteren o.b.v. titel
 function filterMovies(wordInMovie) {
     let filterMovies = movies.filter((movie) => {
         if (movie.title.includes(wordInMovie)) {
             return movie;
         }
     });
+    addMoviesToDom(filterMovies);
 }
 
-addMoviesToDom(filterMovies);
+//stap 11 ul leegmaken en gefilterde toevoegen
+function removeLi() {
+    while (moviesList.firstChild) {
+        moviesList.removeChild(moviesList.firstChild);
+    }
+}
 
-const filterLatestMovies = movie.filter(year => {
-    return movie.year = 2014
-});
 
-addMoviesToDom(filterLatestMovies);
+
+
+
+
