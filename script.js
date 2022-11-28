@@ -75,7 +75,7 @@ function filterLatestMovies(year) {
 }
 
 //filteren o.b.v. titel HIER GAAT ER IETS MIS, MAAR IK HEB GEEN IDEE MEER WAT
-//MEERDERE CODES GEPROBEERD, IK KAN DE FOUT NIET VINDEN.
+//MEERDERE CODES GEPROBEERD, IK KAN DE FOUT NIET VINDEN. ALLEEN ALS IK DE NAAM VAN DE BUTTON INVUL WERKT HET, ANDERS NIET
 function filterMovies(wordInMovie) {
     let filterMovies = movies.filter((moviesList) => {
         console.log("movieList.title", moviesList.title)
