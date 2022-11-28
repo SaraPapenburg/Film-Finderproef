@@ -17,6 +17,7 @@ function createItem(movie) {
 
 // Pakt films uit de database en maakt voor elke een list element in de container
 function addMoviesToDom(movies) {
+    console.log("add to dom", movies)
     const items = movies.map(createItem);
 
     items.forEach((item) => {
@@ -29,6 +30,7 @@ addMoviesToDom(movies);
 // radiobuttons veranderen van event VOLGENS MIJ GAAT HET HIER NIET HELEMAAL GOED
 function addEventListeners() {
     const radioBtns = document.getElementsByName("film-filter");
+    console.log(radioBtns)
     radioBtns.forEach((container) =>
         container.addEventListener("change", handleOnChangeEvent)
     );
@@ -39,8 +41,10 @@ addEventListeners();
 
 // filteren van de films, handleonchange wordt ingevoegd bij de eventlistener functie
 function handleOnChangeEvent(event) {
+    console.log(event.target.value)
     switch (event.target.value) {
         case "latest":
+            console.log("latest1")
             filterLatestMovies(2014);
             break;
         case "avenger":
@@ -59,22 +63,28 @@ function handleOnChangeEvent(event) {
 };
 
 //filteren o.b.v. jaartal
+//WERKT VOLLEDIG NAAR BEHOREN
 function filterLatestMovies(year) {
     let filterYearMovies = movies.filter((movie) => {
         if (movie.year >= year) {
             return movie;
         }
     });
+    removeLi();
     addMoviesToDom(filterYearMovies);
 }
 
-//filteren o.b.v. titel
+//filteren o.b.v. titel HIER GAAT ER IETS MIS, MAAR IK HEB GEEN IDEE MEER WAT
+//MEERDERE CODES GEPROBEERD, IK KAN DE FOUT NIET VINDEN.
 function filterMovies(wordInMovie) {
-    let filterMovies = movies.filter((movie) => {
-        if (movie.title.includes(wordInMovie)) {
-            return movie;
+    let filterMovies = movies.filter((moviesList) => {
+        console.log("movieList.title", moviesList.title)
+        if (moviesList.title.includes("Batman")) {
+            console.log("Zoeken naar:", moviesList.title)
+            return wordInMovie;
         }
     });
+    removeLi();
     addMoviesToDom(filterMovies);
 }
 
@@ -83,6 +93,7 @@ function removeLi() {
     while (moviesList.firstChild) {
         moviesList.removeChild(moviesList.firstChild);
     }
+    console.log("only filtered movies show");
 }
 
 
